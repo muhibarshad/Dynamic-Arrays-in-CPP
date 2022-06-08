@@ -2,6 +2,25 @@
  */
 #include<iostream>
 using namespace std;
+
+//Functions Prototypes
+void display();
+void input(int *&arr, int size);
+void output(int *&arr, int size);
+void add(int *&arr, int &size);
+void insert(int *&arr, int &size);
+void remove(int *&arr, int &size);
+void shrink(int *&arr, int &size);
+void all_inOne_1D_array();
+
+//Main
+int main()
+{
+    all_inOne_1D_array();
+    return 0;
+}
+
+//Display
 void display()
 {
     for (int i = 0; i < 4; i++)
@@ -15,6 +34,8 @@ void display()
     cout << "\t\t\t\t Enter 5 to shrink the size of the array:" << endl;
     cout << "\t\t\t\t Enter 0 to exit the program :" << endl;
 }
+
+//Input
 void input(int *&arr, int size)
 {
     cout << "Enter the elements in the array:" << endl;
@@ -23,6 +44,8 @@ void input(int *&arr, int size)
         cin >> arr[i];
     }
 }
+
+//output
 void output(int *&arr, int size)
 {
     for (int i = 0; i < size; i++)
@@ -31,21 +54,31 @@ void output(int *&arr, int size)
     }
     cout << endl;
 }
+
+//add the element in the array
 void add(int *&arr, int &size)
 {
     int num;
     cout << "Enter the element that you want to adde in the end of the array:" << endl;
     cin >> num;
+    //temp arr to increase the size of the new array
     int *tempArr = new int[size + 1];
+    //copying previous array into the new array
     for (int i = 0; i < size; i++)
     {
         tempArr[i] = arr[i];
     }
+    //delete the previous array
     delete[] arr;
+    //give address of the pointer of first new array to the previous array
     arr = tempArr;
+    //putting the value in the index
     arr[size] = num;
+    //by refernce increase the size of the array
     size++;
 }
+ 
+//insert the element at specific index and increase the sizeof the array 1 index
 void insert(int *&arr, int &size)
 {
     int index;
@@ -54,26 +87,38 @@ void insert(int *&arr, int &size)
     cin >> index;
     cout << "Enter the element that you want to add at the " << index << " position :" << endl;
     cin >> num;
+    /// temp arr to increase the size of the new array
     int *tempArr = new int[size + 1];
+    // copying previous array into the new array
     for (int i = 0; i < size; i++)
     {
         tempArr[i] = arr[i];
     }
+    // delete the previous array
     delete[] arr;
+    // give address of the pointer of first new array to the previous array
     arr = tempArr;
+    // putting the value in the index as 0
     arr[size] = 0;
+    // by refernce increase the size of the array
     size++;
+
+    //now inserting at the specific position
     for (int i = size - 1; i > index - 1; i--)
     {
         arr[i] = arr[i - 1];
     }
     arr[index - 1] = num;
 }
+
+//remove the element at specific element and decrease the size of the array 1 index
 void remove(int *&arr, int &size)
 {
     int num;
     cout << "Enter the element that you want to delete in  the array:" << endl;
     cin >> num;
+
+    //firstly remove the element in the array
     for (int i = 0; i < size; i++)
     {
         if (arr[i] == num)
@@ -83,29 +128,43 @@ void remove(int *&arr, int &size)
             break;
         }
     }
+    // now shrinking the size of the aray as one index
+    // temp arr to increase the size of the new array
     int *tempArr = new int[size - 1];
+    // copying previous array into the new array
     for (int i = 0; i < size - 1; i++)
     {
         tempArr[i] = arr[i];
     }
+    // delete the previous array
     delete[] arr;
+    // give address of the pointer of first new array to the previous array
     arr = tempArr;
+    // by refernce increase the size of the array
     size--;
 }
+
+//shrink the size of the array how many times you want
 void shrink(int *&arr, int &size)
 {
     int num;
     cout << "Enter the number how many index that that you want to shrink from last:" << endl;
     cin >> num;
+    //check 
     if (num <= size)
     {
+        // temp arr to increase the size of the new array
         int *tempArr = new int[size - num];
+        // copying previous array into the new array
         for (int i = 0; i < size - num; i++)
         {
             tempArr[i] = arr[i];
         }
+        // delete the previous array
         delete[] arr;
+        // give address of the pointer of first new array to the previous array
         arr = tempArr;
+        // by refernce increase the size of the array
         size = size - num;
     }
     else
@@ -113,16 +172,27 @@ void shrink(int *&arr, int &size)
         cout << "The entered number is graeter than the size of the array:" << endl;
     }
 }
-int main()
+
+//All in one
+void all_inOne_1D_array()
 {
+    //local varibles
     int size;
     int n;
     bool flag = false;
     cout << "Enter the size of the array:" << endl;
     cin >> size;
+
+    //allocating the memory
     int *arr = new int[size];
+
+    //input
     input(arr, size);
+
+    //clearing the screen
     system("cls");
+
+    //switch statements
     do
     {
         display();
@@ -164,5 +234,5 @@ int main()
     } while (flag == false);
     delete[] arr;
     arr = NULL;
-    return 0;
+  
 }
