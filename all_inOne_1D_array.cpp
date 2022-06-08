@@ -1,3 +1,5 @@
+/*The 1D dynamic arrays full explained with best exmaples
+ */
 #include<iostream>
 using namespace std;
 void display()
